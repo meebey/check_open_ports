@@ -80,7 +80,7 @@ def main():
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('-v', '--verbose', action='count', default=0)
     arg_parser.add_argument('-H', '--host', required=True, nargs=1)
-    arg_parser.add_argument('-p', '--portscan-range', nargs=1, default='1-65535',
+    arg_parser.add_argument('-p', '--portscan-range', nargs=1,
                             metavar='PORT_RANGE', help='port range, e.g.: 1-1024')
     arg_parser.add_argument('-a', '--allowed-ports', nargs=1, default='',
                             metavar='PORTS', help='list of ports split by "," (comma)')
@@ -88,7 +88,10 @@ def main():
     args = arg_parser.parse_args()
     checker = OpenPortsResource('PORT SECURITY SCANNER')
     checker.target_host = args.host[0]
-    checker.portscan_range = args.portscan_range
+    if args.portscan_range:
+        checker.portscan_range = args.portscan_range[0]
+    else:
+        checker.portscan_range = '1-65535'
     if args.allowed_ports and len(args.allowed_ports) > 0:
         checker.allowed_ports = args.allowed_ports[0].split(',')
     if args.nmap_extra_args:
