@@ -98,7 +98,7 @@ def main():
         OpenPortsContext('ports'),
         nagiosplugin.ScalarContext('unknown_ports_count', critical='0:0'),
     )
-    check.main(args.verbose)
+    check.main(args.verbose, timeout=0)
 
 if __name__ == '__main__':
     debugger = False
