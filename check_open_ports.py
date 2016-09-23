@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # open_check_ports is a Nagios check that checks open ports against a whitelist
 #
 # Copyright (C) 2016 Mirco Bauer <meebey@meeby.net>
+# Copyright (C) 2016 Gate Digital Service Limited <www.gatecoin.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -62,6 +63,12 @@ class OpenPortsResource(nagiosplugin.Resource):
                 nmap_command.append(arg)
         # run nmap
         nmap_output = subprocess.check_output(nmap_command)
+        try:
+            self.parse_scan_output(nmap_output)
+        except Exception as e:
+            raise Exception("Failed to parse nmap output: '%s' output:\n%s" % (e, nmap_output)) from e
+
+    def parse_scan_output(self, nmap_output):
         xml_parser = lxml.objectify.makeparser(no_network=True)
         root_node = lxml.objectify.fromstring(nmap_output, xml_parser)
         host_node = root_node.host
