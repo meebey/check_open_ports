@@ -2,8 +2,8 @@
 #
 # open_check_ports is a Nagios check that checks open ports against a whitelist
 #
-# Copyright (C) 2016 Mirco Bauer <meebey@meeby.net>
-# Copyright (C) 2016 Gate Digital Service Limited <www.gatecoin.com>
+# Copyright (C) 2016 Mirco Bauer <meebey@meebey.net>
+# Copyright (C) 2016 Gate Digital Services Limited <www.gatecoin.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
