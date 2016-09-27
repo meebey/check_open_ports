@@ -54,7 +54,7 @@ class OpenPortsResource(nagiosplugin.Resource):
             'nmap', self.target_host,
             '-n', # don't resolve hosts
             '-r', # don't randomize port order
-            '-dd', # increase debug level to list closed ports too
+            '-ddd', # increase debug level to list closed ports too, the 3rd -d is for not optimizing only filtered or closed ports away *facepalm*
             '-p', self.portscan_range,
             '-oX', '-' # output as XML to stdout
         ]
